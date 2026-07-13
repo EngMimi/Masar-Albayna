@@ -131,6 +131,7 @@ function settleRevealMask(target) {
   const settle = () => {
     mask.style.clipPath = "none";
     mask.style.transform = "none";
+    mask.style.willChange = "auto";
   };
 
   mask.addEventListener("transitionend", settle, { once: true });
