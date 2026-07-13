@@ -153,11 +153,20 @@
   }
 
   .carousel__track {
-    height: 640px;
+    height: 460px;
   }
 
   .carousel__card {
     padding: 1.8rem 1.4rem;
+  }
+
+  /* the depth effect offsets side cards by a % of their own width — on
+     desktop the card has a fixed max-width so that % is a small slice of
+     a wide viewport, but on mobile the card is ~82vw, so the same % offset
+     is nowhere near enough to clear it and the side cards' text visibly
+     crashes into the center card. Simplest fix: only show the active card. */
+  .carousel__card:not(.is-center) {
+    display: none;
   }
 
   .footer-grid {

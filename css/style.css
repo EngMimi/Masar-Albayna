@@ -636,14 +636,25 @@ body.is-loading {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: opacity 0.35s ease;
-  /* force its own stacking/paint context so its recurring opacity animation
-     can never bleed its painted text into a sibling line during compositing.
-     will-change keeps it on a permanent, stable GPU layer instead of letting
-     the browser promote/demote it on each textContent swap — that promotion
-     churn, right when a wider word forces a bigger repaint, is what produced
-     a stray stale-tile "ghost" of the new word for a frame or two. */
+  /* force its own stable, permanently-promoted GPU layer so its recurring
+     opacity fade can never bleed a stray "ghost" of the new word into a
+     sibling line during compositing. */
   isolation: isolate;
   will-change: opacity;
+}
+
+/* the hero heading's reveal-mask wraps JS-mutated, nested background-clip:text
+   content (the rotator). Animating that mask's clip-path/transform (the wipe
+   every other .reveal-text element uses) while it contains that nested
+   content is what produced Chromium's stray duplicate of the first word
+   onto line 1 during the initial page load (confirmed via screen recording,
+   reproducing on both the live deploy and a local file open). Skip the
+   clip-path/transform wipe for this one heading — keep only the opacity
+   fade, which needs none of that and cannot trigger the same bug. */
+.hero-headline.reveal-text .reveal-mask,
+.hero-headline.reveal-text.in-view .reveal-mask {
+  clip-path: none;
+  transform: none;
 }
 
 .hero-headline__rotator.is-leaving {
@@ -1205,6 +1216,10 @@ h4 .reveal-mask {
   transform: translateY(14px);
   transition: opacity 0.6s ease, clip-path 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--reveal-delay, 0s);
+  /* keeps this on a stable GPU layer for the duration of the wipe-in —
+     without it, the nested background-clip:text content inside can flash a
+     stray duplicate of itself for a frame while clip-path is mid-transition */
+  will-change: clip-path, transform, opacity;
 }
 
 .reveal-text.in-view .reveal-mask {
