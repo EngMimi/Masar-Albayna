@@ -97,22 +97,15 @@
     max-width: none;
   }
 
+  /* kept side-by-side (same structure as desktop) per explicit request —
+     just tighter gap/ratio so it still fits a phone width. */
   .consult-promo__grid {
-    grid-template-columns: 1fr;
-    text-align: center;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 1.2rem;
   }
 
   .consult-promo__benefits {
-    grid-template-columns: 1fr;
-    justify-items: center;
-  }
-
-  .consult-promo__actions {
-    justify-content: center;
-  }
-
-  .consult-promo__visual {
-    order: -1;
+    gap: 0.6rem 0.8rem;
   }
 
   .grid-2,
@@ -130,17 +123,49 @@
     border-inline-start: none;
   }
 
+  /* same 6-across row as desktop, just condensed — overrides the 3-col
+     tablet rule above, which would otherwise cascade down to phone width */
   .stats-bar__row {
-    grid-template-columns: repeat(2, 1fr);
-    row-gap: 2rem;
+    grid-template-columns: repeat(6, 1fr);
+    row-gap: 0;
+    column-gap: 0.25rem;
   }
 
+  .stats-bar__item {
+    padding-inline: 0.3rem;
+  }
+
+  /* restore the plain "border on every item but the first" look for a
+     single row of 6 — the 3-col tablet rule above only makes sense for
+     a 3-wide grid and would otherwise strip the border off the 4th item */
   .stats-bar__item:nth-child(3n+1) {
     border-inline-start: 1px solid rgba(212, 166, 58, 0.3);
   }
 
-  .stats-bar__item:nth-child(2n+1) {
+  .stats-bar__item:first-child {
     border-inline-start: none;
+  }
+
+  .stats-bar__icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .stats-bar__icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .stats-bar__label {
+    font-size: 0.62rem;
+  }
+
+  .stats-bar__number {
+    font-size: 1.05rem;
+  }
+
+  .stats-bar__number small {
+    font-size: 0.7rem;
   }
 
   .trust .container {
@@ -153,20 +178,36 @@
   }
 
   .carousel__track {
-    height: 460px;
+    height: 400px;
   }
 
+  /* keep the same 3-card fan as desktop (not just the active card) — the
+     card just needs to be a much narrower slice of the viewport than
+     desktop's min(460px, 82vw) so the side cards' offset actually clears
+     the center card instead of crashing into its text. */
   .carousel__card {
-    padding: 1.8rem 1.4rem;
+    width: min(230px, 66vw);
+    padding: 1.4rem 1.1rem;
+    gap: 0.7rem;
   }
 
-  /* the depth effect offsets side cards by a % of their own width — on
-     desktop the card has a fixed max-width so that % is a small slice of
-     a wide viewport, but on mobile the card is ~82vw, so the same % offset
-     is nowhere near enough to clear it and the side cards' text visibly
-     crashes into the center card. Simplest fix: only show the active card. */
-  .carousel__card:not(.is-center) {
-    display: none;
+  .carousel__icon {
+    width: 52px;
+    height: 52px;
+  }
+
+  .carousel__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .carousel__card h3 {
+    font-size: 1rem;
+  }
+
+  .carousel__card p {
+    font-size: 0.8rem;
+    line-height: 1.6;
   }
 
   .footer-grid {
