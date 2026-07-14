@@ -68,6 +68,7 @@ function initMobileNav() {
     toggle.setAttribute("aria-expanded", "false");
     iconMenu?.classList.remove("is-hidden");
     iconClose?.classList.add("is-hidden");
+    document.body.classList.remove("nav-open");
   };
 
   toggle.addEventListener("click", () => {
@@ -75,6 +76,7 @@ function initMobileNav() {
     toggle.setAttribute("aria-expanded", String(isOpen));
     iconMenu?.classList.toggle("is-hidden", isOpen);
     iconClose?.classList.toggle("is-hidden", !isOpen);
+    document.body.classList.toggle("nav-open", isOpen);
   });
 
   menu.querySelectorAll("a").forEach((link) => link.addEventListener("click", close));
