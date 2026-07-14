@@ -365,7 +365,8 @@ h1, h2, h3, h4 {
   pointer-events: none;
 }
 
-body.is-loading {
+body.is-loading,
+body.nav-open {
   overflow: hidden;
 }
 
@@ -518,6 +519,7 @@ body.is-loading {
   position: fixed;
   inset-inline: 0;
   top: var(--header-h);
+  bottom: 0;
   z-index: 99;
   background: rgba(47, 30, 22, 0.97);
   backdrop-filter: blur(18px);
@@ -525,6 +527,7 @@ body.is-loading {
   flex-direction: column;
   padding: 1.5rem 1.5rem 2.5rem;
   gap: 0.3rem;
+  overflow-y: auto;
   transform: translateY(-12px);
   opacity: 0;
   visibility: hidden;
@@ -2501,6 +2504,9 @@ body.popup-open {
   overflow: hidden;
   border: 1px solid var(--warm-beige);
   box-shadow: var(--shadow-sm);
+  /* themed fallback so a slow/blocked map load never shows as a stark
+     white void against the warm palette */
+  background: var(--warm-beige);
 }
 
 .contact-map iframe {
