@@ -147,25 +147,29 @@
   }
 
   .stats-bar__icon {
-    width: 30px;
-    height: 30px;
+    width: 22px;
+    height: 22px;
   }
 
   .stats-bar__icon svg {
-    width: 18px;
-    height: 18px;
+    width: 13px;
+    height: 13px;
+  }
+
+  .stats-bar__item {
+    gap: 0.35rem;
   }
 
   .stats-bar__label {
-    font-size: 0.62rem;
+    font-size: 0.5rem;
   }
 
   .stats-bar__number {
-    font-size: 1.05rem;
+    font-size: 0.8rem;
   }
 
   .stats-bar__number small {
-    font-size: 0.7rem;
+    font-size: 0.55rem;
   }
 
   .trust .container {
@@ -178,7 +182,7 @@
   }
 
   .carousel__track {
-    height: 400px;
+    height: 300px;
   }
 
   /* keep the same 3-card fan as desktop (not just the active card) — the
@@ -186,28 +190,38 @@
      desktop's min(460px, 82vw) so the side cards' offset actually clears
      the center card instead of crashing into its text. */
   .carousel__card {
-    width: min(230px, 66vw);
-    padding: 1.4rem 1.1rem;
-    gap: 0.7rem;
+    width: min(170px, 52vw);
+    padding: 1rem 0.8rem;
+    gap: 0.4rem;
   }
 
   .carousel__icon {
-    width: 52px;
-    height: 52px;
+    width: 38px;
+    height: 38px;
   }
 
   .carousel__icon svg {
-    width: 22px;
-    height: 22px;
+    width: 16px;
+    height: 16px;
   }
 
   .carousel__card h3 {
-    font-size: 1rem;
+    font-size: 0.86rem;
   }
 
   .carousel__card p {
-    font-size: 0.8rem;
-    line-height: 1.6;
+    font-size: 0.7rem;
+    line-height: 1.5;
+  }
+
+  .carousel__link {
+    font-size: 0.75rem;
+  }
+
+  .carousel__divider {
+    width: 6px;
+    height: 6px;
+    margin-block: -0.2rem 0;
   }
 
   .footer-grid {
